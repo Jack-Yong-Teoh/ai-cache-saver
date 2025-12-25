@@ -1,9 +1,8 @@
 import numpy as np
 from sentence_transformers import SentenceTransformer
 
-# Load model once on module import
 model = SentenceTransformer("all-MiniLM-L6-v2")
-SIMILARITY_THRESHOLD = 0.8  # Configurable threshold
+SIMILARITY_THRESHOLD = 0.8
 
 
 def generate_embedding(text: str) -> str:

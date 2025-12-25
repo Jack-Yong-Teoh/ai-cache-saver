@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routes import prompt_image
 
-app = FastAPI(title="AI Cache Minimal")
+app = FastAPI(title="AI Cache Saver")
 
 # Basic CORS to prevent browser blocks
 app.add_middleware(

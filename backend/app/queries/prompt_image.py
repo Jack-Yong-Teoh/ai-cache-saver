@@ -2,6 +2,13 @@ from typing import Optional, List
 from sqlalchemy import BinaryExpression, ColumnOperators
 from sqlalchemy.orm import Session
 from app.models.databases.orm.prompt_image import PromptImage
+from app.models.databases.queries.base import FilterModel, PaginateModel, SortModel
+from app.queries.base import lazyload_data
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
+from app.models.databases.queries.prompt_image import (
+    LazyloadPromptImageResultModel,
+)
 
 
 def get_prompt_image_filter_criterion(
@@ -81,3 +88,37 @@ def save_prompt_image(
     else:
         db.flush()
     return prompt_image
+
+
+async def lazyload_prompt_images(
+    async_db: AsyncSession,
+    filters: list[FilterModel],
+    pagination: PaginateModel,
+    sort: SortModel,
+    included_fields: list[str] = None,
+    excluded_fields: list[str] = None,
+    export: bool = False,
+) -> LazyloadPromptImageResultModel:
+    """
+    Asynchronously loads prompt image data with filtering, sorting, and pagination.
+    """
+    select_query = select(
+        PromptImage.id,
+        PromptImage.prompt_text,
+        PromptImage.image_url,
+        PromptImage.created_date,
+        PromptImage.modified_date,
+    ).select_from(PromptImage)
+
+    results = await lazyload_data(
+        async_db=async_db,
+        select_query=select_query,
+        filters=filters,
+        pagination=pagination,
+        sort=sort,
+        included_fields=included_fields,
+        excluded_fields=excluded_fields,
+        export=export,
+    )
+
+    return LazyloadPromptImageResultModel(**results.__dict__)
