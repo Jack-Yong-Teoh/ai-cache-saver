@@ -1,0 +1,83 @@
+from typing import Optional, List
+from sqlalchemy import BinaryExpression, ColumnOperators
+from sqlalchemy.orm import Session
+from app.models.databases.orm.prompt_image import PromptImage
+
+
+def get_prompt_image_filter_criterion(
+    prompt_image_id: int = None,
+    user_id: int = None,
+    prompt_text: str = None,
+    key_word: str = None,
+    is_public: bool = None,
+) -> List[BinaryExpression]:
+    criterion = [
+        (
+            None
+            if prompt_image_id is None
+            else ColumnOperators.__eq__(PromptImage.id, prompt_image_id)
+        ),
+        (
+            None
+            if user_id is None
+            else ColumnOperators.__eq__(PromptImage.user_id, user_id)
+        ),
+        (
+            None
+            if prompt_text is None
+            else PromptImage.prompt_text.ilike(f"%{prompt_text}%")
+        ),
+        (None if key_word is None else PromptImage.key_word.ilike(f"%{key_word}%")),
+        (
+            None
+            if is_public is None
+            else ColumnOperators.__eq__(PromptImage.is_public, is_public)
+        ),
+    ]
+    return [x for x in criterion if x is not None]
+
+
+def get_prompt_images(
+    db: Session,
+    user_id: int = None,
+    prompt_text: str = None,
+    key_word: str = None,
+    is_public: bool = None,
+) -> List[PromptImage]:
+    criterion = get_prompt_image_filter_criterion(
+        user_id=user_id,
+        prompt_text=prompt_text,
+        key_word=key_word,
+        is_public=is_public,
+    )
+    return db.query(PromptImage).filter(*criterion).all()
+
+
+def get_prompt_image(
+    db: Session,
+    prompt_image_id: int = None,
+    user_id: int = None,
+    prompt_text: str = None,
+    key_word: str = None,
+    is_public: bool = None,
+) -> Optional[PromptImage]:
+    criterion = get_prompt_image_filter_criterion(
+        prompt_image_id=prompt_image_id,
+        user_id=user_id,
+        prompt_text=prompt_text,
+        key_word=key_word,
+        is_public=is_public,
+    )
+    return db.query(PromptImage).filter(*criterion).one_or_none()
+
+
+def save_prompt_image(
+    db: Session, prompt_image: PromptImage, auto_commit: bool = True
+) -> PromptImage:
+    db.add(prompt_image)
+    if auto_commit:
+        db.commit()
+        db.refresh(prompt_image)
+    else:
+        db.flush()
+    return prompt_image
