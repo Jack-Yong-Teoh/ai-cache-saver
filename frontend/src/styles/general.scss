@@ -1,0 +1,20 @@
+// general stles - ant design overwrite... etc
+
+@use "sass:math";
+
+@function to-rem($px, $base-font-size: 16px) {
+  @return math.div($px, $base-font-size) * 1rem;
+}
+
+// text size adjust
+html {
+  -webkit-text-size-adjust: 100%; /* for Safari and Chrome */
+  -moz-text-size-adjust: 100%; /* for Firefox */
+  -ms-text-size-adjust: 100%; /* for Internet Explorer */
+  text-size-adjust: 100%; /* for general */
+}
+
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}

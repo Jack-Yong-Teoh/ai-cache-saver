@@ -6,3 +6,6 @@ uv run alembic revision --autogenerate -m "Commit message"
 
 # formatter
 uv run black .
+
+# activate the venv
+source .venv/bin/activate
