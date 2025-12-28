@@ -19,3 +19,11 @@
 /frontend/npm-debug.log*
 /frontend/yarn-debug.log*
 /frontend/yarn-error.log*
+
+/backend/__pycache__/
+/backend/*.pyc
+/backend/*.pyo
+/backend/.env
+/backend/instance/
+/backend/venv/
+/backend/.pytest_cache/
