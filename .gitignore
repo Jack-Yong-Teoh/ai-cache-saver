@@ -21,8 +21,8 @@
 /frontend/yarn-error.log*
 
 /backend/__pycache__/
-/backend/*.pyc
-/backend/*.pyo
+/backend/app/*.pyc
+/backend/app/*.pyo
 /backend/.env
 /backend/instance/
 /backend/venv/

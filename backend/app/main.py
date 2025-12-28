@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routes import prompt_image
+from app.routes import authentication
 
 app = FastAPI(title="AI Cache Saver")
 
@@ -18,6 +19,12 @@ app.include_router(
     prompt_image.router,
     prefix="/prompt-image",
     tags=["prompt-image"],
+)
+
+app.include_router(
+    authentication.router,
+    prefix="/auth",
+    tags=["auth"],
 )
 
 

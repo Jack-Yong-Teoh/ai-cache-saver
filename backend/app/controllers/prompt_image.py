@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
 from sqlalchemy.ext.asyncio import AsyncSession
+from app.models.databases.orm.user import User
 from fastapi import Depends
 
 from app.decorators.export import export_async
@@ -22,15 +23,18 @@ from app.services.embedding import (
 )
 from app.services.pollination import generate_image_content
 from app.services.cloudinary import upload_image_to_cloud
+from app.services.authentication import get_current_user
+
 
 
 async def create_prompt_image(
     prompt_text: str,
-    user_id: int,
+    current_user: User = Depends(get_current_user),
     is_public: bool = True,
     db: Session = Depends(get_db),
     slave_db: Session = Depends(get_slave_db),
 ) -> PromptImageResponseModel:
+    user_id = current_user.id
     """Handles logic for checking similarity, generating, and uploading images."""
     new_embedding = generate_embedding(prompt_text)
 
@@ -68,6 +72,7 @@ async def create_prompt_image(
 async def lazyload_prompt_images(
     payload: LazyloadRequestModel,
     async_slave_db: AsyncSession = Depends(get_async_slave_db),
+    _: User = Depends(get_current_user),
 ) -> LazyloadPromptImageResultModel:
     """Asynchronously loads paginated and filtered prompt images."""
     logger.debug(
