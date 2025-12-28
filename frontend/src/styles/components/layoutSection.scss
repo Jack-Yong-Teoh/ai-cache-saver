@@ -1,0 +1,181 @@
+@use "../color.scss" as *;
+@use "../general.scss" as *;
+
+.layout__section {
+  min-height: 100vh;
+
+  &__header {
+    position: fixed;
+    z-index: 1001;
+    width: 100%;
+    height: to-rem(64px);
+    padding: 0 to-rem(16px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: $white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+    @media (max-width: 430px) {
+      padding: 0 to-rem(4px);
+    }
+
+    &__left {
+      display: flex;
+      align-items: center;
+      gap: to-rem(12px);
+    }
+  }
+
+  &__toggle {
+    font-size: to-rem(20px);
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+  }
+
+  &__logo {
+    width: 100%;
+    max-width: to-rem(140px);
+    height: auto;
+    max-height: to-rem(40px);
+    padding-right: to-rem(20px);
+    vertical-align: middle;
+    cursor: pointer;
+
+    @media (max-width: 769px) {
+      padding-right: to-rem(10px);
+    }
+  }
+
+  &__body {
+    padding-top: to-rem(64px);
+    position: relative;
+  }
+
+  &__sider {
+    position: fixed !important;
+    left: 0;
+    height: calc(100vh - 64px);
+    background: $white !important;
+    box-shadow: 4px 0 10px -3px rgba(0, 0, 0, 0.08);
+    z-index: 1000;
+    transition: all 0.2s ease-in-out !important;
+
+    .ant-menu-inline .ant-menu-item-selected {
+      color: $white !important;
+    }
+
+    @media (max-width: 430px) {
+      &.collapsed {
+        transform: translateX(-100%);
+        box-shadow: none;
+      }
+      &.expanded {
+        transform: translateX(0);
+        width: to-rem(220px) !important;
+        min-width: to-rem(220px) !important;
+      }
+    }
+  }
+
+  &__main {
+    flex: 1;
+    margin-left: to-rem(220px);
+    transition: margin-left 0.2s ease-in-out;
+    background: $white !important;
+    min-height: calc(100vh - 64px);
+    padding: to-rem(20px) to-rem(20px) to-rem(0px) to-rem(20px);
+
+    @media (max-width: 430px) {
+      padding: to-rem(10px) to-rem(10px) to-rem(0px) to-rem(10px);
+    }
+
+    &.collapsed {
+      margin-left: to-rem(70px);
+    }
+
+    &.is-mobile {
+      margin-left: 0 !important;
+    }
+  }
+
+  &__mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 999;
+  }
+
+  &__menu {
+    border: none !important;
+    background: transparent !important;
+    padding-top: to-rem(10px);
+
+    .ant-menu-item-selected {
+      background-color: $secondary !important;
+      color: $white !important;
+      font-weight: 600;
+    }
+  }
+
+  &__title {
+    font-size: to-rem(22px);
+    font-weight: 600;
+    margin-bottom: to-rem(20px);
+    color: $black;
+  }
+
+  &__content {
+    background: $secondary_1;
+    border-radius: to-rem(12px);
+    padding: to-rem(24px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    @media (max-width: 430px) {
+      padding: to-rem(12px);
+    }
+  }
+
+  &__footer {
+    text-align: center;
+    padding: to-rem(16px) 0;
+    background: transparent !important;
+  }
+
+  &__user__dropdown {
+    // padding: 0 to-rem(8px);
+    transition: all 0.3s;
+    border-radius: to-rem(4px);
+    display: flex;
+    align-items: center;
+    max-width: to-rem(200px);
+    cursor: pointer;
+
+    .user-name {
+      font-weight: 500;
+      color: $black;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: to-rem(100px);
+      display: inline-block;
+      vertical-align: middle;
+
+      @media (max-width: 430px) {
+        display: none !important;
+      }
+    }
+
+    .anticon-down {
+      display: none !important;
+    }
+  }
+}

@@ -1,12 +1,18 @@
-// general stles - ant design overwrite... etc
-
 @use "sass:math";
 
 @function to-rem($px, $base-font-size: 16px) {
   @return math.div($px, $base-font-size) * 1rem;
 }
 
-// text size adjust
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
 html {
   -webkit-text-size-adjust: 100%; /* for Safari and Chrome */
   -moz-text-size-adjust: 100%; /* for Firefox */

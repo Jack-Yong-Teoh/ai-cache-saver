@@ -1,14 +1,45 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ROUTES } from "./Routes";
 import { ScrollRestoration } from "../components";
-import HonmePage from "../pages/homepage";
+import HomePage from "../pages/homepage";
+import PrivateLibrary from "../pages/privateLibrary";
+import PublicLibrary from "../pages/publicLibrary";
+import LayoutSection from "../components/LayoutSection/LayoutSection";
+import Login from "../pages/login";
+import SignUp from "../pages/signUp";
+
 // import { PublicRoute } from "./PublicRouter";
 // import { PrivateRoute } from "./PrivateRouter";
 
 const Router = () => {
   return (
     <Routes>
-      <Route path={ROUTES.default} element={<HonmePage />} />
+      <Route
+        path={ROUTES.default}
+        element={
+          <LayoutSection>
+            <HomePage />
+          </LayoutSection>
+        }
+      />
+      <Route
+        path={ROUTES.publicLibrary}
+        element={
+          <LayoutSection>
+            <PublicLibrary />
+          </LayoutSection>
+        }
+      />
+      <Route
+        path={ROUTES.privateLibrary}
+        element={
+          <LayoutSection>
+            <PrivateLibrary />
+          </LayoutSection>
+        }
+      />
+      <Route path={ROUTES.logIn} element={<Login />} />
+      <Route path={ROUTES.signUp} element={<SignUp />} />s
     </Routes>
   );
 };

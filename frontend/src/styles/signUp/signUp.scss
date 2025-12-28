@@ -1,0 +1,83 @@
+@use "../color.scss" as *;
+@use "../general.scss" as *;
+
+.signup-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top left, $white, #e2e8f0);
+
+  &__container {
+    width: 100%;
+    max-width: to-rem(480px);
+    animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  &__card {
+    border-radius: to-rem(24px) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08) !important;
+    background: $white;
+    padding: to-rem(10px);
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: to-rem(32px);
+  }
+
+  &__title {
+    margin-bottom: to-rem(8px) !important;
+    font-weight: 800 !important;
+    color: #1e293b !important;
+  }
+
+  &__subtitle {
+    color: #64748b;
+    font-size: to-rem(15px);
+  }
+
+  &__input {
+    height: to-rem(48px);
+    border-radius: to-rem(10px) !important;
+    background: #f8fafc !important;
+    border: 1px solid transparent !important;
+
+    &:hover,
+    &:focus {
+      background: $white !important;
+      border-color: $primary !important;
+      box-shadow: 0 0 0 4px rgba($primary, 0.1) !important;
+    }
+  }
+
+  &__button {
+    height: to-rem(50px) !important;
+    border-radius: to-rem(10px) !important;
+    font-size: to-rem(16px) !important;
+    font-weight: 700 !important;
+    background: $primary !important;
+    margin-top: to-rem(8px);
+  }
+
+  &__footer {
+    text-align: center;
+    margin-top: to-rem(24px);
+
+    a {
+      color: $primary;
+      font-weight: 600;
+    }
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

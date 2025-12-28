@@ -1,3 +1,9 @@
 // places to import all the scss
 @use "../styles/color.scss";
 @use "../styles/general.scss";
+@use "../styles/homepage/homepage.scss";
+@use "../styles/components/layoutSection.scss";
+@use "../styles/login/login.scss";
+@use "../styles/signUp/signUp.scss";
+@use "../styles/publicLibrary/publicLibrary.scss";
+@use "../styles/privateLibrary/privateLibrary.scss";

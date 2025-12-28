@@ -1,26 +1,25 @@
-// follow this format
-
 // //theme color
-$primary: #000000;
-// $secondary1: #1b1c1d;
-// $secondary2: #2c2d30;
-// $secondary3: #222222;
-// $secondary4: #af1221;
+$primary: #818cf8;
+$secondary: #818cf8;
+$secondary_1: #f4f8fb;
+$secondary_2: #4f46e5;
 
 // //properties
 $white: #ffffff;
-// $black: #000000;
-// $gray: #9e9e9e;
-// $green: #008000;
+$black: #2c2d30;
+$gray: #9e9e9e;
 
 // //special
-// $disabled: #cccccc;
-// $safe: #4caf50;
-// $danger: #f44336;
-// $link: #4f83f2;
+$disabled: #cccccc;
+$safe: #4caf50;
+$danger: #f44336;
+$link: #4f83f2;
+$footer: #e7ebf2;
+$highlighted_warning: #ffad00;
 
-// $rank-1: #4ccb00;
-// $rank-2: #a1eb05;
-// $rank-3: #e1eb05;
-// $rank-color: #c5a54b;
-// $odds: #c09007;
+$bg-gradients: (
+  "green": linear-gradient(green, #14401b),
+  "purple": linear-gradient(#86639f, #3c2051),
+  "brown": linear-gradient(#d7a135, #71551c),
+  "blue": linear-gradient(#1272bb, #083455),
+);

@@ -1,0 +1,99 @@
+@use "../color.scss" as *;
+@use "../general.scss" as *;
+
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top left, $white, #e2e8f0);
+
+  &__container {
+    width: 100%;
+    max-width: to-rem(450px);
+    animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  &__card {
+    border-radius: to-rem(24px) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08) !important;
+    padding: to-rem(10px);
+  }
+
+  &__header {
+    text-align: center;
+    margin-bottom: to-rem(40px);
+  }
+
+  &__title {
+    margin-bottom: to-rem(8px) !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.5px;
+    color: #1e293b !important;
+  }
+
+  &__subtitle {
+    color: #64748b;
+    font-size: to-rem(15px);
+  }
+
+  &__input {
+    height: to-rem(48px);
+    border-radius: to-rem(10px) !important;
+    background: #f8fafc !important;
+    border: 1px solid transparent !important;
+    transition: all 0.3s ease;
+
+    &:hover,
+    &:focus {
+      background: $white !important;
+      border-color: $primary !important;
+      box-shadow: 0 0 0 4px rgba($primary, 0.1) !important;
+    }
+
+    .ant-input-prefix {
+      margin-right: to-rem(10px);
+      color: #94a3b8;
+    }
+  }
+
+  &__button {
+    height: to-rem(50px) !important;
+    border-radius: to-rem(10px) !important;
+    font-size: to-rem(16px) !important;
+    font-weight: 700 !important;
+    margin-top: to-rem(10px);
+    background: $primary !important;
+    box-shadow: 0 4px 12px rgba($primary, 0.2) !important;
+    border: none !important;
+
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba($primary, 0.3) !important;
+    }
+  }
+
+  &__footer {
+    text-align: center;
+    margin-top: to-rem(24px);
+
+    a {
+      color: $primary;
+      font-weight: 600;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -106,6 +106,8 @@ async def lazyload_prompt_images(
         PromptImage.id,
         PromptImage.prompt_text,
         PromptImage.image_url,
+        PromptImage.is_public,
+        PromptImage.user_id,
         PromptImage.created_date,
         PromptImage.modified_date,
     ).select_from(PromptImage)

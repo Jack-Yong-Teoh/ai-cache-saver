@@ -17,8 +17,10 @@ class DetailedPromptImageQueryResultModel(QueryResultModel):
 
 class LazyloadPromptImageQueryResultModel(QueryResultModel):
     id: Optional[int] = None
+    user_id: Optional[int] = None
     prompt_text: Optional[str] = None
     image_url: Optional[str] = None
+    is_public: Optional[bool] = None
     created_date: Optional[datetime] = None
     modified_date: Optional[datetime] = None
 
