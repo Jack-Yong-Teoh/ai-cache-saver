@@ -8,8 +8,7 @@ import LayoutSection from "../components/LayoutSection/LayoutSection";
 import Login from "../pages/login";
 import SignUp from "../pages/signUp";
 
-// import { PublicRoute } from "./PublicRouter";
-// import { PrivateRoute } from "./PrivateRouter";
+import { PrivateRoute } from "./PrivateRouter";
 
 const Router = () => {
   return (
@@ -17,25 +16,31 @@ const Router = () => {
       <Route
         path={ROUTES.default}
         element={
-          <LayoutSection>
-            <HomePage />
-          </LayoutSection>
+          <PrivateRoute>
+            <LayoutSection>
+              <HomePage />
+            </LayoutSection>
+          </PrivateRoute>
         }
       />
       <Route
         path={ROUTES.publicLibrary}
         element={
-          <LayoutSection>
-            <PublicLibrary />
-          </LayoutSection>
+          <PrivateRoute>
+            <LayoutSection>
+              <PublicLibrary />
+            </LayoutSection>
+          </PrivateRoute>
         }
       />
       <Route
         path={ROUTES.privateLibrary}
         element={
-          <LayoutSection>
-            <PrivateLibrary />
-          </LayoutSection>
+          <PrivateRoute>
+            <LayoutSection>
+              <PrivateLibrary />
+            </LayoutSection>{" "}
+          </PrivateRoute>
         }
       />
       <Route path={ROUTES.logIn} element={<Login />} />

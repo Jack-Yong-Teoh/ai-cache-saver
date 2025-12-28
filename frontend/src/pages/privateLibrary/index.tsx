@@ -40,11 +40,7 @@ const PrivateLibrary: React.FC = () => {
     setLoading(true);
     const values = form.getFieldsValue();
 
-    // Updated Filters: Private images for specific user
-    const filters: any[] = [
-      { field: "is_public", operator: "is", value: false },
-      { field: "user_id", operator: "equals", value: 1 },
-    ];
+    const filters: any[] = [{ field: "user_id", operator: "equals", value: 1 }];
 
     if (values.prompt) {
       filters.push({

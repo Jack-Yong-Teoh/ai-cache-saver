@@ -12,6 +12,8 @@ import {
 } from "@ant-design/icons";
 import useIsMobile from "../../utils/isMobile";
 import IMAGES from "../../assets/images";
+import { retrieveUsername } from "../../services/auth";
+import { logOut } from "../../services/auth";
 
 export interface MenuItem {
   key: string;
@@ -30,6 +32,7 @@ const LayoutSection: React.FC<{ children: React.ReactNode }> = ({
   const navigate = useNavigate();
   const location = useLocation();
   const isMobile = useIsMobile();
+  const username = retrieveUsername() || "User";
 
   const [collapsed, setCollapsed] = useState<boolean>(false);
   const [selectedKey, setSelectedKey] = useState<string>("image-generation");
@@ -67,12 +70,12 @@ const LayoutSection: React.FC<{ children: React.ReactNode }> = ({
   );
 
   const userMenuItems = [
-    {
-      key: "profile",
-      label: "Profile",
-      icon: <UserOutlined />,
-      onClick: () => navigate("/profile"),
-    },
+    // {
+    //   key: "profile",
+    //   label: "Profile",
+    //   icon: <UserOutlined />,
+    //   onClick: () => navigate("/profile"),
+    // },
     {
       key: "logout",
       label: "Logout",
@@ -83,8 +86,7 @@ const LayoutSection: React.FC<{ children: React.ReactNode }> = ({
   ];
 
   const handleLogout = () => {
-    // Implement logout logic here
-    navigate("/login");
+    logOut();
   };
 
   useEffect(() => {
@@ -120,7 +122,9 @@ const LayoutSection: React.FC<{ children: React.ReactNode }> = ({
             <div className="layout__section__user__dropdown">
               <Space>
                 <Avatar icon={<UserOutlined />} />
-                {isMobile ? null : <span className="user-name">John Doe</span>}
+                {isMobile ? null : (
+                  <span className="user-name">{username}</span>
+                )}
               </Space>
             </div>
           </Dropdown>

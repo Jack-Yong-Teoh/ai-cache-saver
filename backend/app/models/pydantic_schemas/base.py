@@ -60,6 +60,7 @@ class TokenResponse(BaseModel):
     refresh_token: str
     token_type: str = "bearer"
     username: Optional[str] = None
+    user_id: Optional[int] = None
 
 
 class RefreshRequest(BaseModel):

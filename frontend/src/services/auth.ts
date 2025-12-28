@@ -25,6 +25,8 @@ export const logOut = async () => {
     console.error("Logout backend call failed", error);
   } finally {
     removeAccessToken();
+    removeUsername();
+    removeUserId();
     window.location.href = "/login";
   }
 };
@@ -56,5 +58,58 @@ export const removeAccessToken = () => {
 
 export const logOutSessionExpired = () => {
   removeAccessToken();
+  removeUsername();
+  removeUserId();
   window.location.href = "/login";
+};
+
+export const storeUsername = (username: string) => {
+  try {
+    localStorage.setItem("USERNAME", username);
+  } catch {
+    message.error("Error storing username");
+  }
+};
+
+export const retrieveUsername = () => {
+  try {
+    return localStorage.getItem("USERNAME");
+  } catch {
+    message.error("Error retrieving username");
+    return null;
+  }
+};
+
+export const removeUsername = () => {
+  try {
+    localStorage.removeItem("USERNAME");
+  } catch {
+    message.error("Error removing username");
+  }
+};
+
+export const storeUserId = (userId: number) => {
+  try {
+    localStorage.setItem("USER_ID", userId.toString());
+  } catch {
+    message.error("Error storing user ID");
+  }
+};
+
+export const retrieveUserId = () => {
+  try {
+    const userId = localStorage.getItem("USER_ID");
+    return userId ? parseInt(userId, 10) : null;
+  } catch {
+    message.error("Error retrieving user ID");
+    return null;
+  }
+};
+
+export const removeUserId = () => {
+  try {
+    localStorage.removeItem("USER_ID");
+  } catch {
+    message.error("Error removing user ID");
+  }
 };

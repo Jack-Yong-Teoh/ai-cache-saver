@@ -1,5 +1,6 @@
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import { retrieveAccessToken, logOutSessionExpired } from "./auth";
+import { message } from "antd";
 
 export const http = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -33,6 +34,7 @@ http.interceptors.response.use(
       error.response &&
       (error.response.status === 401 || error.response.status === 403)
     ) {
+      message.error("Session expired. Please log in again.");
       logOutSessionExpired();
     }
     return Promise.reject(error);

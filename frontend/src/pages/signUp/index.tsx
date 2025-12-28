@@ -1,18 +1,25 @@
 import React, { useState } from "react";
 import { Form, Input, Button, Card, Typography, message } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
+import { signUp } from "../../services/auth";
+import { useNavigate } from "react-router-dom";
 
 const { Title, Text } = Typography;
 
 const SignUp: React.FC = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
 
   const onFinish = async (values: any) => {
     setLoading(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      console.log("SignUp values:", values);
+      await signUp({
+        username: values.username,
+        email: values.email,
+        password: values.password,
+      });
       message.success("Account created successfully!");
+      navigate("/login");
     } catch (error) {
       message.error("Registration failed. Please try again.");
     } finally {

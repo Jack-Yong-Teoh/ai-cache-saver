@@ -1,7 +1,7 @@
 from typing import Callable
-from fastapi import Request, Response
+from fastapi import Request, Response, HTTPException
 from fastapi.routing import APIRoute
-
+from fastapi.responses import JSONResponse
 
 class InterceptorAPIRoute(APIRoute):
     def get_route_handler(self) -> Callable:
@@ -9,12 +9,19 @@ class InterceptorAPIRoute(APIRoute):
 
         async def custom_route_handler(request: Request) -> Response:
             try:
-                # Executes the actual controller logic
                 return await original_route_handler(request)
+                
+            except HTTPException as http_exc:
+                return JSONResponse(
+                    status_code=http_exc.status_code,
+                    content={
+                        "detail": http_exc.detail,
+                        "message": "Request failed", 
+                    },
+                )
+            
             except Exception as e:
-                # Minimal error handling to keep the project simple
-                from fastapi.responses import JSONResponse
-
+                # Only catch unexpected crashes as 500
                 return JSONResponse(
                     status_code=500,
                     content={

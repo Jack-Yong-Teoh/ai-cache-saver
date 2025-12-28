@@ -63,6 +63,7 @@ async def login(payload: LoginRequest, db: Session = Depends(get_db)) -> TokenRe
         refresh_token=refresh_token,
         token_type="bearer",
         username=user.username,
+        user_id=user.id,
     )
 
 

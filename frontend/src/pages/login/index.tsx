@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Form, Input, Button, Card, Typography, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { logIn, storeUserId } from "../../services/auth";
+import { storeAccessToken, storeUsername } from "../../services/auth";
 
 const { Title, Text } = Typography;
 
@@ -12,12 +14,16 @@ const Login: React.FC = () => {
   const onFinish = async (values: any) => {
     setLoading(true);
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      console.log("Login values:", values);
+      const response = await logIn(values);
+      storeAccessToken(response.data.access_token);
+      storeUsername(response.data.username);
+      storeUserId(response.data.user_id);
       message.success("Login successful!");
       navigate("/");
-    } catch (error) {
-      message.error("Invalid username or password");
+    } catch (error: any) {
+      message.error(
+        error?.response?.data?.detail || "Login failed. Please try again."
+      );
     } finally {
       setLoading(false);
     }
@@ -44,16 +50,14 @@ const Login: React.FC = () => {
             className="login-page__form"
           >
             <Form.Item
-              name="username"
-              label="Username"
-              rules={[
-                { required: true, message: "Please input your username!" },
-              ]}
+              name="email"
+              label="Email"
+              rules={[{ required: true, message: "Please input your email!" }]}
             >
               <Input
                 prefix={<UserOutlined />}
-                placeholder="Username"
-                autoComplete="username"
+                placeholder="Email"
+                autoComplete="email"
                 className="login-page__input"
               />
             </Form.Item>
