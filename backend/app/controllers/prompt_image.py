@@ -26,7 +26,6 @@ from app.services.cloudinary import upload_image_to_cloud
 from app.services.authentication import get_current_user
 
 
-
 async def create_prompt_image(
     prompt_text: str,
     current_user: User = Depends(get_current_user),

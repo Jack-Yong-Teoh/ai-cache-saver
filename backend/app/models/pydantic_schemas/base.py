@@ -59,6 +59,7 @@ class TokenResponse(BaseModel):
     access_token: str
     refresh_token: str
     token_type: str = "bearer"
+    username: Optional[str] = None
 
 
 class RefreshRequest(BaseModel):

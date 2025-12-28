@@ -12,11 +12,11 @@ import {
   Typography,
   Descriptions,
   Tag,
+  message,
 } from "antd";
 import {
   SearchOutlined,
   InfoCircleOutlined,
-  PictureOutlined,
   CalendarOutlined,
 } from "@ant-design/icons";
 import { getPromptImages } from "../../services/imageGeneration";
@@ -65,8 +65,8 @@ const PrivateLibrary: React.FC = () => {
       setImages(res?.data || []);
       setTotal(res?.count || 0);
       setCurrentPage(page);
-    } catch (error) {
-      console.error("Search failed:", error);
+    } catch (error: any) {
+      message.error(error?.response?.data?.detail || "Failed to fetch images.");
     } finally {
       setLoading(false);
     }
@@ -186,9 +186,6 @@ const PrivateLibrary: React.FC = () => {
             image={Empty.PRESENTED_IMAGE_SIMPLE}
             description={
               <div className="flex flex-col items-center gap-2">
-                <PictureOutlined
-                  style={{ fontSize: "24px", color: "#cbd5e1" }}
-                />
                 <Text type="secondary">
                   You haven't generated any private images yet.
                 </Text>

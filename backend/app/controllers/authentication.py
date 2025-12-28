@@ -59,7 +59,10 @@ async def login(payload: LoginRequest, db: Session = Depends(get_db)) -> TokenRe
 
     access_token, refresh_token = create_tokens(user.id)
     return TokenResponse(
-        access_token=access_token, refresh_token=refresh_token, token_type="bearer"
+        access_token=access_token,
+        refresh_token=refresh_token,
+        token_type="bearer",
+        username=user.username,
     )
 
 

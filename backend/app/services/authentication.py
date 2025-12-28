@@ -92,9 +92,10 @@ def decode_token(token: str, expected_type: str = "access") -> int:
 def decode_refresh_token(token: str) -> int:
     return decode_token(token, expected_type="refresh")
 
+
 def get_current_user(
-    credentials: HTTPAuthorizationCredentials = Depends(security), 
-    db: Session = Depends(get_db)
+    credentials: HTTPAuthorizationCredentials = Depends(security),
+    db: Session = Depends(get_db),
 ) -> User:
     """
     1. Swagger/Frontend sends 'Authorization: Bearer <token>'
@@ -102,10 +103,10 @@ def get_current_user(
     3. We decode and verify it.
     """
     token = credentials.credentials
-    
+
     # This calls your service logic (Signature check, Expiry check)
     user_id = decode_token(token, expected_type="access")
-    
+
     user = get_user(db, user_id=user_id, optional=True)
     if not user:
         raise HTTPException(
