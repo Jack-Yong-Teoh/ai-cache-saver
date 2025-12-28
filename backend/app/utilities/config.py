@@ -2,8 +2,12 @@
 import os
 from dataclasses import dataclass
 
-
 def load_env_file(filepath):
+    # FIX: Check if file exists before trying to open it
+    if not os.path.exists(filepath):
+        print(f"Notice: '{filepath}' not found. Skipping file load (using Docker env vars).")
+        return
+
     with open(filepath, encoding="utf-8") as f:
         for line in f:
             line = line.strip()
@@ -11,9 +15,8 @@ def load_env_file(filepath):
                 key, value = line.split("=", 1)
                 os.environ[key] = value
 
-
+# Now this is safe to run
 load_env_file(".env")
-
 
 @dataclass(frozen=True)
 class AuthConfig:

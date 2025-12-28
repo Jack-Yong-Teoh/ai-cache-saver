@@ -27,3 +27,5 @@
 /backend/instance/
 /backend/venv/
 /backend/.pytest_cache/
+
+/.env*
