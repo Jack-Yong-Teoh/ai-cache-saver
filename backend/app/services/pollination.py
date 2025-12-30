@@ -1,8 +1,9 @@
 import httpx
 from urllib.parse import quote
+import os
 
 # Your API Key
-POLLINATIONS_API_KEY = "sk_1nw05XCHjzmAUN60Lq7MXg9bLth6EZfP"
+POLLINATIONS_API_KEY = os.getenv("POLLINATIONS_API_KEY")
 
 
 async def generate_image_content(prompt: str) -> bytes:
