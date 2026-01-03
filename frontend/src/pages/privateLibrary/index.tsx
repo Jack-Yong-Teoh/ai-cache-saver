@@ -21,10 +21,12 @@ import {
 } from "@ant-design/icons";
 import { getPromptImages } from "../../services/imageGeneration";
 import dayjs from "dayjs";
+import { retrieveUserId } from "../../services/auth";
 
 const { Title, Paragraph, Text } = Typography;
 
 const PrivateLibrary: React.FC = () => {
+  const userId = retrieveUserId();
   const [form] = Form.useForm();
   const [loading, setLoading] = useState<boolean>(false);
   const [images, setImages] = useState<any[]>([]);
@@ -40,7 +42,7 @@ const PrivateLibrary: React.FC = () => {
     setLoading(true);
     const values = form.getFieldsValue();
 
-    const filters: any[] = [{ field: "user_id", operator: "equals", value: 1 }];
+    const filters: any[] = [{ field: "user_id", operator: "equals", value: Number(userId) }];
 
     if (values.prompt) {
       filters.push({
