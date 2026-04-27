@@ -1,0 +1,16 @@
+# backend/.dockerignore
+
+# Ignore the virtual environment (keeps image small)
+.venv
+venv
+
+# Ignore local environment variables (CRITICAL FIX)
+.env
+.env.*
+
+# Ignore cache
+__pycache__
+*.pyc
+.pytest_cache
+.coverage
+htmlcov
